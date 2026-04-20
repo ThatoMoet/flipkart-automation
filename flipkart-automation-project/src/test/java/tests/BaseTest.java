@@ -80,15 +80,12 @@ public class BaseTest{
         if (driver != null){
             driver.quit();
         };
-
-
     }
 
     @AfterSuite
     public void flushReport() {
         extent.flush();
     }
-
     }
 
 
