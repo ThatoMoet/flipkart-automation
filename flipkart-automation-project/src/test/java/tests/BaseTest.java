@@ -37,6 +37,7 @@ public class BaseTest{
 
     }
 
+
     @BeforeMethod
     public void setUpBrowser(){
         String browser = ConfigReader.getConfig().getProperty("browser");

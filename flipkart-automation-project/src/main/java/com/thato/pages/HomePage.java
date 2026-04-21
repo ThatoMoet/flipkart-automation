@@ -1,6 +1,7 @@
 package com.thato.pages;
 
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,10 +22,10 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//a[contains(@href,'grocery')]")
     private WebElement groceryCategory;
 
-    @FindBy(xpath = "//a[contains(@href,'electronics')]")
+    @FindBy(xpath = "//div[contains(text(),'Electronics')]")
     private WebElement electronicsCategory;
 
-    @FindBy()
+    @FindBy(xpath = "//span[@role='button' and text()='X']")
     private WebElement closeModalButton;
 
 
@@ -33,17 +34,26 @@ public class HomePage extends BasePage{
     }
 
     public boolean isLogoVisible(){
+        logger.info("Checking logo visibility");
         return logo.isDisplayed();
     }
 
     public void searchFor(String term){
+        logger.info("Searching for: " + term);
+
         searchBar.clear();
         searchBar.click();
         searchBar.sendKeys(term);
+        searchBar.sendKeys(Keys.ENTER);
 
+    }
+    public boolean isCategoryVisible() {
+        return electronicsCategory.isDisplayed();
     }
 
     public void clickCategory(String category) {
+        logger.info("Clicking category: " + category);
+
         if (category.equalsIgnoreCase("grocery")) {
             groceryCategory.click();
         } else if (category.equalsIgnoreCase("electronics")) {
