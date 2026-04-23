@@ -1,11 +1,10 @@
 package com.thato.pages;
 
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import utils.LoggerHelper;
+import utils.WaitHelper;
 
 public class HomePage extends BasePage{
     private static final Logger logger = LoggerHelper.logger(HomePage.class);
@@ -25,7 +24,7 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//div[contains(text(),'Electronics')]")
     private WebElement electronicsCategory;
 
-    @FindBy(xpath = "//span[@role='button' and text()='X']")
+    @FindBy(xpath ="//span[@role='button' and text()='X']")
     private WebElement closeModalButton;
 
 
@@ -40,9 +39,8 @@ public class HomePage extends BasePage{
 
     public void searchFor(String term){
         logger.info("Searching for: " + term);
-
-        searchBar.clear();
-        searchBar.click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", searchBar);
         searchBar.sendKeys(term);
         searchBar.sendKeys(Keys.ENTER);
 
@@ -68,6 +66,14 @@ public class HomePage extends BasePage{
             logger.info("Login modal closed");
         } catch (Exception e) {
             logger.info("No login modal present");
+        }
+        // Wait for overlay to disappear regardless
+        try {
+            WaitHelper.waitForVisible(driver,
+                    By.cssSelector(".Kxl7wj"));
+            logger.info("Overlay gone");
+        } catch (Exception e) {
+            logger.info("No overlay present");
         }
     }
 }
