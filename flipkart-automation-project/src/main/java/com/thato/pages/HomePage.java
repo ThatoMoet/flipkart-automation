@@ -51,14 +51,19 @@ public class HomePage extends BasePage{
 
     public void clickCategory(String category) {
         logger.info("Clicking category: " + category);
-
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         if (category.equalsIgnoreCase("grocery")) {
-            groceryCategory.click();
+            js.executeScript("arguments[0].click();", groceryCategory);
         } else if (category.equalsIgnoreCase("electronics")) {
-            electronicsCategory.click();
+            js.executeScript("arguments[0].click();", electronicsCategory);
         }
 
     }
+    public boolean isSearchBarVisible() {
+        logger.info("Checking search bar visibility");
+        return searchBar.isDisplayed();
+    }
+
 
     public void closeLoginModal() {
         try {
