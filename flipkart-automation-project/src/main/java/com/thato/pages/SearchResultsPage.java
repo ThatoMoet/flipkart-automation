@@ -17,6 +17,8 @@ public class SearchResultsPage extends BasePage {
     @FindBy(className = "WNv7PR")
     private List<WebElement> sortOptions;
 
+    @FindBy(css = "div[data-id] a")
+    private List<WebElement> productLinks;
 
     public SearchResultsPage(WebDriver driver) {
         super(driver);
@@ -34,6 +36,13 @@ public class SearchResultsPage extends BasePage {
     public int getResultsCount(){
         logger.info("Getting search results count");
         return searchResults.size();
+    }
+
+
+
+    public void clickFirstProduct() {
+        logger.info("Clicking first product");
+        productLinks.get(0).click();
     }
 
     public void selectSortOption(String option){

@@ -20,6 +20,7 @@ import utils.ConfigReader;
 import utils.LoggerHelper;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class BaseTest{
@@ -75,7 +76,10 @@ public class BaseTest{
         driver.get(config.getProperty("base.url"));}
 
 
-
+    protected void switchToNewTab() {
+        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+    }
     @AfterMethod
     public void tearDown(){
         if (driver != null){

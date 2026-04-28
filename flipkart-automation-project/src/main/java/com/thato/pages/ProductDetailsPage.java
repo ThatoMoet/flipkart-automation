@@ -19,10 +19,10 @@ public class ProductDetailsPage extends BasePage{
     @FindBy(xpath = "//div[contains(text(),'₹')]")
     private WebElement productPrice;
 
-    @FindBy(xpath = "//div[text()='Add to cart']")
-    private WebElement addToCart;
+    @FindBy(xpath = "//div[contains(@style,'inter_bold') and contains(@dir,'auto')]")
+    private WebElement productRating;
 
-    @FindBy(xpath= "//div[text()='Product Highlights']")
+    @FindBy(xpath= "//div[text()='Product highlights']")
     private WebElement productHighlights;
 
     @FindBy(xpath = "//div[text()='Similar Products']")
@@ -40,12 +40,12 @@ public class ProductDetailsPage extends BasePage{
         return productPrice.getText();
     }
 
-    public boolean isAddToCartVisible(){
-        logger.info("Checking Add to Cart visibility");
-        return addToCart.isDisplayed();
+    public boolean productRatingIsVisible(){
+        logger.info("Checking Product Rating visibility");
+        return productRating.isDisplayed();
     }
 
-    public boolean productHighlightsVisibles(){
+    public boolean productHighlightsVisible(){
         logger.info("Checking product Highlights");
         return productHighlights.isDisplayed();
     }

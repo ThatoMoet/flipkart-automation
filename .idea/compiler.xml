@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="flipkart-utilities" />
+        <module name="flipkart-automation-project" />
       </profile>
     </annotationProcessing>
   </component>
