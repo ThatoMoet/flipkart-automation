@@ -1,6 +1,7 @@
 package tests;
 
 import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentReporter;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -12,26 +13,28 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.chromium.ChromiumDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 import utils.ConfigReader;
 import utils.LoggerHelper;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class BaseTest{
-    protected static ExtentReports extent;
+@Listeners(listeners.TestListener.class)
+public class BaseTest {
+    public static ExtentReports extent;
     protected Properties config;
-    protected WebDriver driver;
+    public WebDriver driver;
     private static final Logger logger = LoggerHelper.logger(BaseTest.class);
+    public static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
 
     @BeforeSuite
-    public void setUpReportAndConfig(){
-        config =  ConfigReader.getConfig();
+    public void setUpReportAndConfig() {
+        new File("test-output").mkdirs();
+
+        config = ConfigReader.getConfig();
         ExtentSparkReporter reporter = new ExtentSparkReporter("test-output/ExtentReport.html");
         extent = new ExtentReports();
         extent.attachReporter(reporter);
@@ -40,32 +43,31 @@ public class BaseTest{
 
 
     @BeforeMethod
-    public void setUpBrowser(){
-        String browser = ConfigReader.getConfig().getProperty("browser");
-        boolean headless = Boolean.parseBoolean(ConfigReader.getConfig().getProperty("headless"));
+    public void setUpBrowser() {
+        config = ConfigReader.getConfig(); // add this line
+        String browser = config.getProperty("browser");
+        boolean headless = Boolean.parseBoolean(config.getProperty("headless"));
 
-        if (browser.equalsIgnoreCase("chrome")){
+        if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions co = new ChromeOptions();
-            if (headless){
+            if (headless) {
                 co.addArguments("--headless");
             }
             driver = new ChromeDriver(co);
-
 
 
         } else if (browser.equalsIgnoreCase("firefox")) {
             WebDriverManager.firefoxdriver().setup();
             FirefoxOptions ffo = new FirefoxOptions();
 
-            if (headless){
+            if (headless) {
                 ffo.addArguments("--headless");
             }
             driver = new FirefoxDriver(ffo);
 
 
-        }
-        else {
+        } else {
             logger.error("Unsupported Browser");
         }
 
@@ -73,18 +75,21 @@ public class BaseTest{
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
         driver.manage().window().setSize(new Dimension(1920, 1080));
         driver.manage().window().maximize();
-        driver.get(config.getProperty("base.url"));}
+        driver.get(config.getProperty("base.url"));
+    }
 
 
     protected void switchToNewTab() {
         ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
     }
+
     @AfterMethod
-    public void tearDown(){
-        if (driver != null){
+    public void tearDown() {
+        if (driver != null) {
             driver.quit();
-        };
+        }
+        ;
     }
 
     @AfterSuite

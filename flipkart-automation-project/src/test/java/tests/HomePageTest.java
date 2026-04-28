@@ -24,7 +24,7 @@ public class HomePageTest extends BaseTest{
         data = ExcelReader.readTestData("HomePage");
     }
 
-    @Test
+    @Test(groups = "smoke", priority = 1, enabled = true)
     public void HomePageLoads(){
         String expectedResult = data.get(0).get("Expected Result");
         logger.info("Running TC001 - " + data.get(0).get("Test Case Name"));
@@ -34,7 +34,7 @@ public class HomePageTest extends BaseTest{
         logger.info("TC001 passed - title: " + actualTitle);
     }
 
-    @Test
+    @Test(groups = "smoke", priority = 2, enabled = true)
     public void logoVisibility(){
         logger.info("Running TC002 - " + data.get(1).get("Test Case Name"));
         Assert.assertTrue(homePage.isLogoVisible());
@@ -42,7 +42,7 @@ public class HomePageTest extends BaseTest{
 
     }
 
-    @Test
+    @Test(groups = "smoke", priority = 3, enabled = true)
     public void categoryLinksVisible(){
         logger.info("Running TC003 - " + data.get(2).get("Test Case Name"));
         Assert.assertTrue(homePage.isCategoryVisible(), "Categories not visible");

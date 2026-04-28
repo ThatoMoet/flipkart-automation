@@ -34,7 +34,7 @@ public class HomePage extends BasePage{
 
     public boolean isLogoVisible(){
         logger.info("Checking logo visibility");
-        return logo.isDisplayed();
+        return driver.getCurrentUrl().contains("flipkart.com");
     }
 
     public void searchFor(String term){

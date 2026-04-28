@@ -23,7 +23,7 @@ public class NavigationTest extends BaseTest {
         data = ExcelReader.readTestData("Navigation");
     }
 
-    @Test(groups = "smoke", priority = 14, enabled = true)
+    @Test(groups = "smoke", priority = 4, enabled = true)
     public void electronicsPageLoads() {
         logger.info("Running TC014 - " + data.get(0).get("Test Case Name"));
         homePage.clickCategory("electronics");
@@ -31,21 +31,21 @@ public class NavigationTest extends BaseTest {
         logger.info("TC014 passed");
     }
 
-    @Test(groups = "smoke", priority = 15, enabled = true)
+    @Test(groups = "smoke", priority = 5, enabled = true)
     public void searchBarIsVisible() {
         logger.info("Running TC015 - " + data.get(1).get("Test Case Name"));
         Assert.assertTrue(homePage.isSearchBarVisible(), "Search bar not visible");
         logger.info("TC015 passed");
     }
 
-    @Test(groups = "smoke", priority = 16, enabled = true)
+    @Test(groups = "smoke", priority = 6, enabled = true)
     public void pageURLIsCorrect() {
         logger.info("Running TC016 - " + data.get(2).get("Test Case Name"));
         Assert.assertTrue(driver.getCurrentUrl().contains("flipkart.com"), "Wrong URL");
         logger.info("TC016 passed");
     }
 
-    @Test(groups = "regression", priority = 17, enabled = true)
+    @Test(groups = "regression", priority = 7, enabled = true)
     public void searchUpdatesTitle() {
         logger.info("Running TC017 - " + data.get(3).get("Test Case Name"));
         homePage.searchFor("laptop");
@@ -53,7 +53,7 @@ public class NavigationTest extends BaseTest {
         logger.info("TC017 passed");
     }
 
-    @Test(groups = "regression", priority = 18, enabled = true)
+    @Test(groups = "regression", priority = 8, enabled = true)
     public void groceryPageLoads() {
         logger.info("Running TC018 - " + data.get(4).get("Test Case Name"));
         homePage.clickCategory("grocery");
@@ -61,14 +61,14 @@ public class NavigationTest extends BaseTest {
         logger.info("TC018 passed");
     }
 
-    @Test(groups = "regression", priority = 19, enabled = true)
+    @Test(groups = "regression", priority = 9, enabled = true)
     public void homePageURLCorrect() {
         logger.info("Running TC019 - " + data.get(5).get("Test Case Name"));
         Assert.assertEquals(driver.getCurrentUrl(), "https://www.flipkart.com/", "Homepage URL incorrect");
         logger.info("TC019 passed");
     }
 
-    @Test(groups = "regression", priority = 20, enabled = true)
+    @Test(groups = "regression", priority = 10, enabled = true)
     public void searchBarPlaceholderVisible() {
         logger.info("Running TC020 - " + data.get(6).get("Test Case Name"));
         Assert.assertTrue(homePage.isSearchBarVisible(), "Search bar placeholder not visible");

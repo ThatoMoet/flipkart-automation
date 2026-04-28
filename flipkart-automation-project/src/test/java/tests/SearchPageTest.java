@@ -25,7 +25,7 @@ public class SearchPageTest extends BaseTest {
     data = ExcelReader.readTestData("SearchPage");
     }
 
-    @Test
+    @Test(groups = "regression", priority = 11, enabled = true)
     public void resultsContainer(){
         String searchTerm = data.get(1).get("Search Term");
         logger.info("Running TC005 - " + data.get(1).get("Test Case Name"));
@@ -37,7 +37,7 @@ public class SearchPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(groups = "regression", priority = 12, enabled = true)
     public void returnResults(){
         String searchTerm = data.get(0).get("Search Term");
         logger.info("Getting search Term");
@@ -50,21 +50,19 @@ public class SearchPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(groups = "regression", priority = 13, enabled = true)
     public void sortLowToHigh(){
-        String option = data.get(2).get("Search Term");
-        logger.info("Getting search Term");
-        homePage.searchFor(option);
+        String searchTerm = data.get(2).get("Search Term");
+        logger.info("Running TC006 - " + data.get(2).get("Test Case Name"));
+        homePage.searchFor(searchTerm);
         searchPage = new SearchResultsPage(driver);
-
-        searchPage.selectSortOption(option);
-        Assert.assertTrue(searchPage.getResultsCount() > 0);
-        logger.info("TC006 passed - sorted low to high");
-
+        searchPage.selectSortOption("Price -- Low to High"); // hardcoded sort option
+        Assert.assertTrue(searchPage.getResultsCount() > 0, "No results after sorting");
+        logger.info("TC006 passed");
 
     }
 
-    @Test
+    @Test(groups = "regression", priority = 14, enabled = true)
     public void sortByPopularity(){
         String searchTerm = data.get(3).get("Search Term");
         logger.info("Getting search Term");
@@ -77,7 +75,7 @@ public class SearchPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(groups = "regression", priority = 15, enabled = true)
     public void resultsCountGreaterThanZero(){
         String searchTerm = data.get(4).get("Search Term");
         logger.info("Getting search Term");

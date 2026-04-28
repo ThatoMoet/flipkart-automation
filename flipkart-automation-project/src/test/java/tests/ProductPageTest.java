@@ -25,7 +25,7 @@ public class ProductPageTest extends BaseTest{
     homePage.closeLoginModal();
     data = ExcelReader.readTestData("ProductPage");}
 
-    @Test
+    @Test(groups = "regression", priority = 16, enabled = true)
     public void productTitleDisplayed(){
         String searchTerm = data.get(0).get("Search Term");
         logger.info("Running TC009 - " + data.get(0).get("Test Case Name"));
@@ -42,7 +42,7 @@ public class ProductPageTest extends BaseTest{
 
     }
 
-    @Test
+    @Test(groups = "regression", priority = 17, enabled = true)
     public void productPriceVisible(){
         String searchTerm = data.get(0).get("Search Term");
         logger.info("Running TC010 - " + data.get(1).get("Test Case Name"));
@@ -58,7 +58,7 @@ public class ProductPageTest extends BaseTest{
 
     }
 
-    @Test
+    @Test(groups = "regression", priority = 18, enabled = true)
     public void productRatingVisible() {
         String searchTerm = data.get(2).get("Search Term");
         logger.info("Running TC011 - " + data.get(2).get("Test Case Name"));
@@ -71,7 +71,7 @@ public class ProductPageTest extends BaseTest{
         logger.info("TC011 passed");
     }
 
-    @Test
+    @Test(groups = "regression", priority = 19, enabled = true)
     public void productHighlightsVisible(){
         String searchTerm = data.get(3).get("Search Term");
         logger.info("Running TC012 - " + data.get(3).get("Test Case Name"));
@@ -84,7 +84,7 @@ public class ProductPageTest extends BaseTest{
         logger.info("TC012 passed");
     }
 
-    @Test
+    @Test(groups = "regression", priority = 20, enabled = true)
     public void relatedProductsVisible(){
         String searchTerm = data.get(3).get("Search Term");
         logger.info("Running TC012 - " + data.get(4).get("Test Case Name"));
