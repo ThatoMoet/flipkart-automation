@@ -16,7 +16,7 @@ pipeline {
         stage('Build Utilities') {
             steps {
                 dir('flipkart-utilities') {
-                    sh 'mvn clean install'
+                    bat 'mvn clean install'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 dir('flipkart-automation-project') {
-                    sh 'mvn test'
+                    bat 'mvn test'
                 }
             }
         }
